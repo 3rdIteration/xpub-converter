@@ -9,7 +9,7 @@ Hierarchical Deterministic Wallets. This enables a user to keep track of a singl
 infinite number of public/private keypairs can be generated deterministically. As Bitcoin wallets have increased in 
 complexity over the years, there are now a variety of different versions of extended public/private keys. You can convert an 
 extended public/private key from any version to a different version by changing the "version bytes" but this is hard to do 
-if you aren't an experienced developer. This tool makes it simple for anyone to convert between different versions.
+if you aren't an experienced developer. This tool makes it simple for anyone to convert between different versions. (Eg: Converting xpub to ypub or xpub, converting xprv to yprv or zprv)
 
 Who needs this tool?
 ----------------
