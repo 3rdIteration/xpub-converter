@@ -7,8 +7,8 @@ What is this tool?
 Most Bitcoin wallets these days support [BIP32](https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki), 
 Hierarchical Deterministic Wallets. This enables a user to keep track of a single piece of data from which a nearly 
 infinite number of public/private keypairs can be generated deterministically. As Bitcoin wallets have increased in 
-complexity over the years, there are now a variety of different versions of extended public keys. You can convert an 
-extended public key from any version to a different version by changing the "version bytes" but this is hard to do 
+complexity over the years, there are now a variety of different versions of extended public/private keys. You can convert an 
+extended public/private key from any version to a different version by changing the "version bytes" but this is hard to do 
 if you aren't an experienced developer. This tool makes it simple for anyone to convert between different versions.
 
 Who needs this tool?
@@ -21,6 +21,14 @@ a specific version of extended public key with regard to the paths used for key 
 Standards
 -------
 This tool uses version bytes as described in [SLIP-0132](https://github.com/satoshilabs/slips/blob/master/slip-0132.md)
+
+Usage
+-------
+Simply unzipping this Github repository and running index.html in any browser will run the tool correctly.
+
+Editing
+-------
+Rather than simply editing browserified.js, you should edit the xpubConvert.js file in the /js folder and then build this tool using the command below. 
 
 Building
 -------

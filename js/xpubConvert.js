@@ -18,6 +18,16 @@ const prefixes = new Map(
     ['Upub', '024289ef'],
     ['vpub', '045f1cf6'],
     ['Vpub', '02575483'],
+	['xprv', '0488ade4'],
+    ['yprv', '049d7878'],
+    ['Yprv', '0295b005'],
+    ['zprv', '04b2430c'],
+    ['Zprv', '02aa7a99'],
+    ['tprv', '04358394'],
+    ['uprv', '044a4e28'],
+    ['Uprv', '024285b5'],
+    ['vprv', '045f18bc'],
+    ['Vprv', '02575048'],
   ]
   );
 
@@ -131,6 +141,116 @@ export const NETWORK_TYPES = {
     pubKeyHash: 0x6f,
     scriptHash: 0xc4,
     wif: 0xef,
+  },
+    "xprv": {
+    messagePrefix: '\x18Bitcoin Signed Message:\n',
+    bech32: 'bc',
+    bip32: {
+      public: 0x0488b21e,
+      private: 0x0488ade4,
+    },
+    pubKeyHash: 0x00,
+    scriptHash: 0x05,
+    wif: 0x80,
+  },
+  "yprv": {
+    messagePrefix: '\x18Bitcoin Signed Message:\n',
+    bech32: 'bc',
+    bip32: {
+      public: 0x049d7cb2,
+      private: 0x049d7878,
+    },
+    pubKeyHash: 0x00,
+    scriptHash: 0x05,
+    wif: 0x80,
+  },
+  "Yprv": {
+    messagePrefix: '\x18Bitcoin Signed Message:\n',
+    bech32: 'bc',
+    bip32: {
+      public: 0x0295b43f,
+      private: 0x0295b005,
+    },
+    pubKeyHash: 0x00,
+    scriptHash: 0x05,
+    wif: 0x80,
+  },
+  "zprv": {
+    messagePrefix: '\x18Bitcoin Signed Message:\n',
+    bech32: 'bc',
+    bip32: {
+      public: 0x04b24746,
+      private: 0x04b2430c,
+    },
+    pubKeyHash: 0x00,
+    scriptHash: 0x05,
+    wif: 0x80,
+  },
+  "Zprv": {
+    messagePrefix: '\x18Bitcoin Signed Message:\n',
+    bech32: 'bc',
+    bip32: {
+      public: 0x02aa7ed3,
+      private: 0x02aa7a99,
+    },
+    pubKeyHash: 0x00,
+    scriptHash: 0x05,
+    wif: 0x80,
+  },
+  "tprv": {
+    messagePrefix: '\x18Bitcoin Signed Message:\n',
+    bech32: 'tb',
+    bip32: {
+      public: 0x043587cf,
+      private: 0x04358394,
+    },
+    pubKeyHash: 0x6f,
+    scriptHash: 0xc4,
+    wif: 0xef,
+  },
+  "uprv": {
+    messagePrefix: '\x18Bitcoin Signed Message:\n',
+    bech32: 'tb',
+    bip32: {
+      public: 0x044a5262,
+      private: 0x044a4e28,
+    },
+    pubKeyHash: 0x6f,
+    scriptHash: 0xc4,
+    wif: 0xef,
+  },
+  "Uprv": {
+    messagePrefix: '\x18Bitcoin Signed Message:\n',
+    bech32: 'tb',
+    bip32: {
+      public: 0x024289ef,
+      private: 0x024285b5,
+    },
+    pubKeyHash: 0x6f,
+    scriptHash: 0xc4,
+    wif: 0xef,
+  },
+  "vprv": {
+    messagePrefix: '\x18Bitcoin Signed Message:\n',
+    bech32: 'tb',
+    bip32: {
+      public: 0x045f1cf6,
+      private: 0x045f18bc,
+    },
+    pubKeyHash: 0x6f,
+    scriptHash: 0xc4,
+    wif: 0xef,
+  },
+  "Vprv": {
+    messagePrefix: '\x18Bitcoin Signed Message:\n',
+    bech32: 'tb',
+    bip32: {
+      public: 0x02575483,
+      private: 0x02575048,
+    },
+    pubKeyHash: 0x6f,
+    scriptHash: 0xc4,
+    wif: 0xef,
   }
 };
 
@@ -148,7 +268,14 @@ function byteArrayToHexString(byteArray) {
 */
 global.changeVersionBytes = function(xpub, targetFormat) {
   if (!prefixes.has(targetFormat)) {
-    return "Invalid target version";
+    return "<b>Error</b>: Invalid target version";
+  }
+
+  var inType = xpub.substring(1,4);
+  var outType = targetFormat.substring(1,4);
+
+  if (inType != outType) {
+    return "<b>Error</b>: Input and Output extended key type must match... <br><br>Found <br>Input Key Type: ".concat(inType, " <br>Output Key Type: ", outType);
   }
 
   // trim whitespace

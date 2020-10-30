@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>Bitcoin Extended Public Key Converter</title>
+    <title>Bitcoin Extended Public & Private Key Converter</title>
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -25,7 +25,7 @@
   </head>
   <body>
     <div class="container">
-    <h1 class="text-center">Bitcoin Extended Public Key Converter</h1>
+    <h1 class="text-center">Bitcoin Extended Public & Private Key Converter</h1>
     <hr/>
     <div class="row">
       <div class="col-md-12">
@@ -34,10 +34,11 @@
             <div class="col-sm-2">
             </div>
             <div class="col-sm-10">
-              <p>You can enter any version of a valid Bitcoin extended public key and convert it to another version of the same extended public key.</p>
+              <p>You can enter any version of a valid Bitcoin extended public/private key and convert it to another version of the same extended key.</p>
               <p>
                 For more info see <a href="https://github.com/satoshilabs/slips/blob/master/slip-0132.md" target="_blank">SLIP-0132</a>.
               </p>
+              <p><b>Warning: You should normally never need to convert or handle xprv keys except in VERY SPECIFIC recovery situations... Working with extended private keys (xprv/yprv/zprv, etc) should only ever be done in an offline, amnesic environment like TAILS Linux...</b></p>
             </div>
           </div>
           <div class="form-group generate-container">
@@ -45,7 +46,10 @@
             <div class="col-sm-10">
               <div class="form-inline">
                 <div class="input-group-inline">
-                  <span>What version do you want to convert the extended public key into?</span><br/>
+                  Paste your extended key to be converted here:<br/>
+                  <textarea id="xpub" rows="4" cols="50" style="width: 300px;height: 150px;"></textarea>
+                  <br/><br/>
+                  <span>What version do you want to convert the extended key into?</span><br/>
                   <select id="format" class="format form-control">
                     <option value="xpub" selected>xpub (mainnet P2PKH or P2SH)</option>
                     <option value="ypub">ypub (mainnet P2WPKH in P2SH)</option>
@@ -57,13 +61,20 @@
                     <option value="Upub">Upub (testnet P2WSH in P2SH)</option>
                     <option value="vpub">vpub (testnet P2WPKH)</option>
                     <option value="Vpub">Vpub (testnet P2WSH)</option>
+					<option value="xprv">xprv (mainnet P2PKH or P2SH)</option>
+                    <option value="yprv">yprv (mainnet P2WPKH in P2SH)</option>
+                    <option value="Yprv">Yprv (mainnet P2WSH in P2SH)</option>
+                    <option value="zprv">zprv (mainnet P2WPKH)</option>
+                    <option value="Zprv">Zprv (mainnet P2WSH)</option>
+                    <option value="tprv">tprv (testnet P2PKH or P2SH)</option>
+                    <option value="uprv">uprv (testnet P2WPKH in P2SH)</option>
+                    <option value="Uprv">Uprv (testnet P2WSH in P2SH)</option>
+                    <option value="vprv">vprv (testnet P2WPKH)</option>
+                    <option value="Vprv">Vprv (testnet P2WSH)</option>
                   </select>
-                  <br/><br/><br/>
-                  Paste your extended public key here:<br/>
-                  <textarea id="xpub" rows="4" cols="50" style="width: 300px;height: 150px;"></textarea>
-                  <br/>
+                  <br/><br/>
                   <button class="btn" onclick="processForm();return false;">Convert</button><br/><br/><br/>
-                  Converted extended public key:<br/><br/>
+                  Converted extended key:<br/><br/>
                   <span id="output"></span><br/><br/>
                   Fingerprint: <span id="fingerprint"></span><br/>
                   Parent Fingerprint: <span id="parentFingerprint"></span><br/>
@@ -78,9 +89,9 @@
             <div class="col-sm-10">
               <h2>This tool is 100% open source code</h2>
               <p>
-                <span>The Bitcoin Extended Public Key Converter repository can be found at </span>
-                <a href="https://github.com/jlopp/xpub-converter" target="_blank">
-                https://github.com/jlopp/xpub-converter
+                <span>The Bitcoin Extended Public & Private Key Converter repository can be found at </span>
+                <a href="https://github.com/3rdIteration/xpub-converter" target="_blank">
+                https://github.com/3rdIteration/xpub-converter
                 </a>
               </p>
               <h3>Libraries</h3>
