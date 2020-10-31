@@ -1,4 +1,4 @@
-Bitcoin Extended Public Key Converter
+Bitcoin Extended Key Converter (Public & Private)
 =====================================
 
 What is this tool?
