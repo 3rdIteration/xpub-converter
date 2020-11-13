@@ -15,11 +15,13 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
     <script src="js/browserified.js"></script>
+    <script src="js/qrcodejs/qrcode.min.js"></script>
     <script>
       function processForm() {
         document.getElementById('output').innerHTML = changeVersionBytes(document.getElementById('xpub').value, document.getElementById('format').value);
         document.getElementById('fingerprint').innerHTML = getFingerprint(document.getElementById('xpub').value, document.getElementById('format').value);
         document.getElementById('parentFingerprint').innerHTML = getParentFingerprint(document.getElementById('xpub').value, document.getElementById('format').value);
+        qrcode.makeCode(document.getElementById('output').innerHTML);
       }
     </script>
   </head>
@@ -47,37 +49,47 @@
               <div class="form-inline">
                 <div class="input-group-inline">
                   Paste your extended key to be converted here:<br/>
-                  <textarea id="xpub" rows="4" cols="50" style="width: 300px;height: 150px;"></textarea>
+                  <textarea id="xpub" rows="4" cols="50" style="width: 500px;height: 50px;"></textarea>
                   <br/><br/>
                   <span>What version do you want to convert the extended key into?</span><br/>
                   <select id="format" class="format form-control">
-                    <option value="xpub" selected>xpub (mainnet P2PKH or P2SH)</option>
-                    <option value="ypub">ypub (mainnet P2WPKH in P2SH)</option>
-                    <option value="Ypub">Ypub (mainnet P2WSH in P2SH)</option>
-                    <option value="zpub">zpub (mainnet P2WPKH)</option>
-                    <option value="Zpub">Zpub (mainnet P2WSH)</option>
-                    <option value="tpub">tpub (testnet P2PKH or P2SH)</option>
-                    <option value="upub">upub (testnet P2WPKH in P2SH)</option>
-                    <option value="Upub">Upub (testnet P2WSH in P2SH)</option>
-                    <option value="vpub">vpub (testnet P2WPKH)</option>
-                    <option value="Vpub">Vpub (testnet P2WSH)</option>
-					<option value="xprv">xprv (mainnet P2PKH or P2SH)</option>
-                    <option value="yprv">yprv (mainnet P2WPKH in P2SH)</option>
-                    <option value="Yprv">Yprv (mainnet P2WSH in P2SH)</option>
-                    <option value="zprv">zprv (mainnet P2WPKH)</option>
-                    <option value="Zprv">Zprv (mainnet P2WSH)</option>
-                    <option value="tprv">tprv (testnet P2PKH or P2SH)</option>
-                    <option value="uprv">uprv (testnet P2WPKH in P2SH)</option>
-                    <option value="Uprv">Uprv (testnet P2WSH in P2SH)</option>
-                    <option value="vprv">vprv (testnet P2WPKH)</option>
-                    <option value="Vprv">Vprv (testnet P2WSH)</option>
+                    <option value="xpub" selected>xpub 'Legacy'            (mainnet P2PKH or P2SH)</option>
+                    <option value="ypub">ypub    'Segwit'                  (mainnet P2WPKH in P2SH)</option>
+                    <option value="zpub">zpub    'Native Segwit'           (mainnet P2WPKH)</option>
+                    <option value="Ypub">Ypub    'Multisig Segwit'         (mainnet P2WSH in P2SH)</option>
+                    <option value="Zpub">Zpub    'Multisig Native Segwit'  (mainnet P2WSH)</option>
+                    <option value="tpub">tpub    'Legacy'                  (testnet P2PKH or P2SH)</option>
+                    <option value="upub">upub    'Segwit'                  (testnet P2WPKH in P2SH)</option>
+                    <option value="vpub">vpub    'Native Segwit'           (testnet P2WPKH)</option>
+                    <option value="Upub">Upub    'Multisig Segwit'         (testnet P2WSH in P2SH)</option>
+                    <option value="Vpub">Vpub    'Multisig Native Segwit'  (testnet P2WSH)</option>
+					<option value="xprv">xprv    'Legacy'                  (mainnet P2PKH or P2SH)</option>
+                    <option value="yprv">yprv    'Segwit'                  (mainnet P2WPKH in P2SH)</option>
+                    <option value="zprv">zprv    'Native Segwit'           (mainnet P2WPKH)</option>
+                    <option value="Yprv">Yprv    'Multisig Segwit'         (mainnet P2WSH in P2SH)</option>
+                    <option value="Zprv">Zprv    'Multisig Native Segwit'  (mainnet P2WSH)</option>
+                    <option value="tprv">tprv    'Legacy'                  (testnet P2PKH or P2SH)</option>
+                    <option value="uprv">uprv,   'Segwit'                  (testnet P2WPKH in P2SH)</option>
+                    <option value="vprv">vprv,   'Native Segwit'           (testnet P2WPKH)</option>
+                    <option value="Uprv">Uprv,   'Multisig Segwit'         (testnet P2WSH in P2SH)</option>
+                    <option value="Vprv">Vprv,   'Multisig Native Segwit'  (testnet P2WSH)</option>
                   </select>
                   <br/><br/>
-                  <button class="btn" onclick="processForm();return false;">Convert</button><br/><br/><br/>
-                  Converted extended key:<br/><br/>
-                  <span id="output"></span><br/><br/>
+                  <button class="btn" onclick="processForm();return false;">Convert</button><br/><br/>
+                  <b>Converted extended key:</b><br/><br/>
+                  <span id="output"></span><br><br>
                   Fingerprint: <span id="fingerprint"></span><br/>
-                  Parent Fingerprint: <span id="parentFingerprint"></span><br/>
+                  Parent Fingerprint: <span id="parentFingerprint"></span><br/><br>
+                  <b>Extended Key QR Code:</b><br/><br/>
+                  <div id="qrcode"></div>
+                  <script type="text/javascript">
+                  var qrcode = new QRCode(document.getElementById("qrcode"), {
+                      width: 400,
+                      height: 400,
+                  });
+                  </script>
+                  <i>Scan this QR code with a Bitcoin wallet like Blue Wallet or Electrum</i>
+                  <br><br>
                 </div>
               </div>
             </div>
