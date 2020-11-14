@@ -16,7 +16,7 @@ Who needs this tool?
 Bitcoin wallet developers may find this tool helpful during testing, such as for switching between mainnet and testnet versions.
 
 Bitcoin users may find this tool helpful if they are trying to import watch-only wallets into software that expects 
-a specific version of extended public key with regard to the paths used for key derivation.
+a specific version of extended public key with regard to the paths used for key derivation. (For example, those seeking to export an xpub/ypub/zpub from Ledger Live to use in some other wallet or tool.)
 
 Standards
 -------
@@ -24,6 +24,12 @@ This tool uses version bytes as described in [SLIP-0132](https://github.com/sato
 
 Usage
 -------
+**Online**
+
+You can run this tool in your browser directly from Github [by clicking here](https://3rditeration.github.io/btc-extended-key-converter/)
+
+**Offline**
+
 Simply unzipping this Github repository and running index.html in any browser will run the tool correctly.
 
 Editing
