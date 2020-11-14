@@ -19,9 +19,9 @@
     <script>
       function processForm() {
         document.getElementById('output').innerHTML = changeVersionBytes(document.getElementById('xpub').value, document.getElementById('format').value);
+        qrcode.makeCode(document.getElementById('output').innerHTML);
         document.getElementById('fingerprint').innerHTML = getFingerprint(document.getElementById('xpub').value, document.getElementById('format').value);
         document.getElementById('parentFingerprint').innerHTML = getParentFingerprint(document.getElementById('xpub').value, document.getElementById('format').value);
-        qrcode.makeCode(document.getElementById('output').innerHTML);
       }
     </script>
   </head>
