@@ -18541,10 +18541,10 @@ global.changeVersionBytes = function (xpub, targetFormat) {
     return "<b>Error</b>: Invalid target version";
   }
 
-  var inType = xpub.substring(1, 4);
-  var outType = targetFormat.substring(1, 4);
+  var inType = xpub.substring(0, 4);
+  var outType = targetFormat.substring(0, 4);
 
-  if (inType != outType) {
+  if (inType.charAt(3) != outType.charAt(3)) {
     return "<b>Error</b>: Input and Output extended key type must match... <br><br>Found <br>Input Key Type: ".concat(inType, " <br>Output Key Type: ", outType);
   } // trim whitespace
 
